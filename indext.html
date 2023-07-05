@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+ //1방법
+    // const root = document.getElementById("root");
+    // let counter = 0;
+    // function countUp(){
+    //     counter = counter+1;
+    //     render();
+    // }
+    // function render(){
+    //     ReactDOM.render(<Container/>,root);
+    // }
+    // const Container =()=> (<div>
+    //     <h3>Total clicks: {counter}</h3>
+    //     <button onClick={countUp}>Click me</button>
+    //     </div>);
+    // render()
+//////////////////////////////////////////////////////
+    // const root = document.getElementById("root");
+    // let counter = 0;
+
+    // function App(){
+    //     let [counter,setCounter] = React.useState(0);
+    //     const onClick = ()=>{
+    //         // setCounter(counter+1);
+    //         setCounter((current) =>current+1);
+    //     }
+    //     return(<div>
+    //     <h3>Total clicks: {counter}</h3>
+    //     <button onClick={onClick}>Click me</button>
+    //     </div>);
+    // }
+    //     ReactDOM.render(<App/>,root);
+///////////////////////////////////////////////////////////
+// const root = document.getElementById("root");
+//     function MinutesToHours(){
+//         const [amount,setAmount]=React.useState(0);
+//         const [inverted,setInverted]=React.useState(false);
+//         const onChange = (event)=>{
+//             setAmount(event.target.value)
+//         }
+//         const reset = ()=>setAmount(0)
+//         const onFlipped = ()=>{
+//             reset();
+//             setInverted((current)=>!current);
+//         };
+//         return(
+//         <div>
+//             <label for="minutes">Minutes</label>
+//             <input value={inverted ? amount*60 : amount} id="minutes" placeholder="Minutes" type="number" onChange={onChange} disabled={inverted}/> 
+//             <br/>
+//             <label for="hours">Hours</label>
+//             <input value={inverted ? amount : Math.round(amount/60)} id="hours" placeholder="Hours" type="number" disabled={!inverted} onChange={onChange} />
+//             <button onClick={reset}>reset</button>
+//             <button onClick={onFlipped}>{inverted ? "Turn bakc":"Invert"}</button>
+//         </div>
+//         );
+//     }
+//     function KmToMildes(){
+//         return <h3>KM 2 M</h3>
+//     }
+//     function App(){
+//         const [index,setIndex] = React.useState("xx");
+//         const onSelect = (event)=>{
+//             setIndex(event.target.value)
+//         }
+//         return(
+//         <div>
+//             <h1>Super Converter</h1>
+//             <select value={index} onChange={onSelect}>
+//                 <option value="xx">choice</option>
+//                 <option value="0">분과시</option>
+//                 <option value="1">킬로&마일</option>
+//             </select>
+//             <hr/>
+//             {index ==="xx" ? "select unit" : null}
+//             {index ==="0" ? <MinutesToHours/> : null}
+//             {index ==="1" ? <KmToMildes/> : null}
+//         </div>
+//         );
+//     }
+//         ReactDOM.render(<App/>,root);
+//////////////////////////////////////////////////////////////
+    
+    function Btn({text,changeValue}){
+        console.log(text)
+        return <button 
+        onClick={changeValue} 
+        style={{
+            backgroundColor:"tomato",
+            color:"white",
+            padding:"10px 20px",
+            border:0,
+            borderRadius:10,
+        }}>{text}</button>
+    }
+    Btn.propTypes={
+        text:PropTypes.string,
+    }
+    function App(){
+        const [value,setValue] = React.useState("Save Changes")
+        const changeValue =()=>setValue("Revert Changes")
+        return(
+        <div>
+            <Btn text={value} changeValue={changeValue}/>
+            <Btn text="Continue"/>
+        </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App/>,root);
+</script>
+</html>
