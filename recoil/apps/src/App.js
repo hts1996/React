@@ -1,11 +1,16 @@
-import {RecoilRoot} from "recoil";
-import Home from "./components/Home";
-function App() {
+import React from "react";
+import { RecoilRoot } from "recoil";
+
+import TodoList from "./components/TodoList";
+
+const App = () => {
   return (
-    <RecoilRoot>
-      <Home />
-    </RecoilRoot>
+    <div className="App">
+      <h1>Recoil Example</h1>
+      <h2>Learn recoill with simple todo list app</h2>
+       <TodoList />
+    </div>
   );
-}
+};
 
 export default App;
