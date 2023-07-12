@@ -12,25 +12,6 @@ function Home() {
   const popsortedMovies = useRecoilValue(popsortState);
   const votesortedMovies = useRecoilValue(votesortState);
   const datesortedMovies = useRecoilValue(datesortState);
-
-  const getMovies = useCallback(async () => {
-      await (
-      axios({
-        method:'get',
-        url:`https://api.themoviedb.org/3/movie/now_playing?api_key=c0caf52837a8d0967b55547df9f1bfe3&language=ko&page=1`,
-
-      }).then((response)=>{
-      setMovies(response.data.results);
-      setLoading(false)})
-      .catch ((error)=>{
-        console.error(error)
-      }))
-  },[setMovies]);
-  useEffect(() => {
-    console.log('124134')
-    getMovies()
-  },[getMovies]);
-
   const popSort = () => {
     setMovies(popsortedMovies);
   };
@@ -40,6 +21,42 @@ function Home() {
   const dateSort = () => {
     setMovies(datesortedMovies);
   };
+
+// useEffect(() => {
+//   const getMovies = () => {
+//     axios({
+//       method:'get',
+//       url:`https://api.themoviedb.org/3/movie/now_playing?api_key=c0caf52837a8d0967b55547df9f1bfe3&language=ko&page=1`,
+//     })
+//       .then((response) => {
+//         setMovies(response.data.results);
+//         setLoading(false);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   };
+//   getMovies();
+//   console.log(1);
+// }, [setMovies]);
+
+const getMovies = useCallback(async () => {
+  await (
+  axios({
+    method:'get',
+    url:`https://api.themoviedb.org/3/movie/now_playing?api_key=c0caf52837a8d0967b55547df9f1bfe3&language=ko&page=1`,
+
+  }).then((response)=>{
+  setMovies(response.data.results);
+  setLoading(false)})
+  .catch ((error)=>{
+    console.error(error)
+  }))
+},[setMovies]);
+useEffect(() => {
+console.log('124134')
+getMovies()
+},[getMovies]);
 
   return (
     <div>

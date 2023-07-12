@@ -1,4 +1,4 @@
-import { useEffect,useState  } from "react";
+import { useEffect,useState,useCallback } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
 import axios from "axios";
@@ -6,8 +6,8 @@ function Detail() {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState([]);
-  const getMovie = async () => {
-    const json = await (
+  const getMovie = useCallback(async () => {
+    await (
       axios({
         method:'get',
         url:`https://api.themoviedb.org/3/movie/${id}?api_key=c0caf52837a8d0967b55547df9f1bfe3&language=ko`,
@@ -16,10 +16,10 @@ function Detail() {
         setMovie(response.data);
         setLoading(false);
       }))
-  };
+  },[id,setMovie]);
   useEffect(() => {
     getMovie();
-  }, []);
+  }, [getMovie]);
   return (
     <div className={styles.container}>
       {loading ? (
