@@ -1,6 +1,5 @@
 import { selector } from "recoil";
 import { movieListState } from "../atoms/movieListState";
-import axios from "axios";
 
 export const popsortState = selector({
   key: "popsortState",
@@ -14,22 +13,6 @@ export const popsortState = selector({
     return sortedMovies;
   },
 });
-
-export const getMovies = selector({
-  key: "getMovies",
-  get: async({get})=>{
-    try{
-      const mod = await axios(`https://api.themoviedb.org/3/movie/now_playing?api_key=c0caf52837a8d0967b55547df9f1bfe3&language=ko&page=1`)
-      return mod.data.results
-    }catch(error){
-      console.log(`${error}`)
-      return [];
-    }
-    
-  }
-    
-  },
-);
 
 
 export const votesortState = selector({
