@@ -4,11 +4,12 @@ import styles from "./Home.module.css";
 import axios from "axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { movieListState } from "../atoms/movieListState";
-import { popsortState,votesortState,datesortState } from "../selectors/moviesortState";
+import { getMovies,popsortState,votesortState,datesortState } from "../selectors/moviesortState";
 
 function Home() {
   const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useRecoilState(movieListState);
+  const Movies = useRecoilValue(getMovies);
+  const [movies,setMovies] = useRecoilState(movieListState);
   const popsortedMovies = useRecoilValue(popsortState);
   const votesortedMovies = useRecoilValue(votesortState);
   const datesortedMovies = useRecoilValue(datesortState);
@@ -40,23 +41,30 @@ function Home() {
 //   console.log(1);
 // }, [setMovies]);
 
-const getMovies = useCallback(async () => {
-  await (
-  axios({
-    method:'get',
-    url:`https://api.themoviedb.org/3/movie/now_playing?api_key=c0caf52837a8d0967b55547df9f1bfe3&language=ko&page=1`,
+// const getMovies = useCallback(async () => {
+//   await (
+//   axios({
+//     method:'get',
+//     url:`https://api.themoviedb.org/3/movie/now_playing?api_key=c0caf52837a8d0967b55547df9f1bfe3&language=ko&page=1`,
 
-  }).then((response)=>{
-  setMovies(response.data.results);
-  setLoading(false)})
-  .catch ((error)=>{
-    console.error(error)
-  }))
-},[setMovies]);
-useEffect(() => {
-console.log('124134')
-getMovies()
-},[getMovies]);
+//   }).then((response)=>{
+//   setMovies(response.data.results);
+//   setLoading(false)})
+//   .catch ((error)=>{
+//     console.error(error)
+//   }))
+// },[setMovies]);
+// useEffect(() => {
+// console.log('124134')
+// getMovies()
+// },[getMovies]);
+useEffect(()=>{
+  if (Movies){
+    setMovies(Movies)
+    setLoading(false)
+  }
+},[Movies,setMovies])
+
 
   return (
     <div>
