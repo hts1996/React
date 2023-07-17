@@ -1,0 +1,13 @@
+.navbar {
+    width: 100%;
+    background-color: black;
+    padding: 15px 0px;
+    text-align: left;
+ }
+ .navbarMenu {
+     border-radius: 0.5rem;
+     border: 1px solid;
+     text-align: center;
+     color: yellow;
+     padding: 10px;
+ }
