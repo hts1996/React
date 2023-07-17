@@ -2,5 +2,5 @@
 npm run start
 
 리액트 생성
-npx create-react-app "앱이름" --type react
+npx create-react-app "앱이름" --template typescript
 
