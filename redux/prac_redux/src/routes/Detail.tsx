@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styles from "./Detail.module.css";
 import axios from "axios";
 import { DMovie } from "../model/mmovie";
+import Comment from "./Comment";
 const Detail: React.FC = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,7 @@ const Detail: React.FC = () => {
   }, [getMovie]);
 
   return (
+    <div>
     <div className={styles.container}>
       {loading ? (
         <div className={styles.loader}>
@@ -55,6 +57,8 @@ const Detail: React.FC = () => {
       ) : (
         <div>Movie data not found</div> // movie가 null인 경우에 메시지 출력
       )}
+    </div>
+      <Comment />
     </div>
   );
 };

@@ -22,7 +22,6 @@ export const movieSlice = createSlice({
         },
         popsortedMovies: (state) => {
         state.value = [...state.value].sort((a, b) => b.popularity - a.popularity);
-        console.log(state.value)
       },
       votesortedMovies: (state) => {
         state.value = [...state.value].sort((a, b) => b.vote_average - a.vote_average);
