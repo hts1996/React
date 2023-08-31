@@ -29,3 +29,8 @@ export type MComment={
     id:number;
     docs:string;
 }
+
+export type showComment={
+    id:number;
+    show:string;
+}
